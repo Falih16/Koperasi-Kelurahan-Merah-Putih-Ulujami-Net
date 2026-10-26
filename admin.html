@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard Pengurus | Koperasi Kelurahan Merah Putih Ulujami</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet">
+</head>
+<body class="admin-body">
+
+    <div class="admin-wrapper">
+        <!-- ================= SIDEBAR ADMIN ================= -->
+        <aside class="admin-sidebar" id="adminSidebar">
+            <div class="p-3 border-bottom d-flex align-items-center justify-content-between">
+                <a href="/" class="d-flex align-items-center gap-2 text-decoration-none">
+                    <div id="sidebarLogoContainer">
+                        <div class="kmp-brand-badge" style="width: 38px; height: 38px; font-size: 13px;">MP</div>
+                    </div>
+                    <div>
+                        <div class="fw-bold font-editorial text-dark" style="font-size: 14px; line-height: 1.2;" id="sidebarCoopName">Koperasi Merah Putih</div>
+                        <div class="text-secondary fw-semibold" style="font-size: 10.5px; letter-spacing: 0.05em;" id="sidebarCoopSub">PANEL PENGURUS</div>
+                    </div>
+                </a>
+                <button type="button" class="btn btn-sm d-lg-none" onclick="document.getElementById('adminSidebar').classList.remove('show')">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+
+            <div class="p-3 flex-grow-1 overflow-y-auto d-flex flex-column gap-1">
+                <div class="small fw-bold text-uppercase text-secondary px-2 mb-1" style="font-size: 11px; letter-spacing: 0.06em;">Menu Utama</div>
+                <button type="button" class="admin-nav-item active" data-admin-tab="dashboard" onclick="window.KMPUAdmin.switchTab('dashboard')">
+                    <i class="bi bi-grid-1x2"></i> Ringkasan Dashboard
+                </button>
+                <button type="button" class="admin-nav-item" data-admin-tab="pendaftaran" onclick="window.KMPUAdmin.switchTab('pendaftaran')">
+                    <i class="bi bi-whatsapp text-success"></i> Pendaftaran Anggota
+                </button>
+                <button type="button" class="admin-nav-item" data-admin-tab="produk" onclick="window.KMPUAdmin.switchTab('produk')">
+                    <i class="bi bi-box-seam"></i> Katalog Produk
+                </button>
+                <button type="button" class="admin-nav-item" data-admin-tab="kategori" onclick="window.KMPUAdmin.switchTab('kategori')">
+                    <i class="bi bi-tags"></i> Kategori Produk
+                </button>
+                <button type="button" class="admin-nav-item" data-admin-tab="usaha" onclick="window.KMPUAdmin.switchTab('usaha')">
+                    <i class="bi bi-shop"></i> Bidang Usaha
+                </button>
+                <button type="button" class="admin-nav-item" data-admin-tab="pengurus" onclick="window.KMPUAdmin.switchTab('pengurus')">
+                    <i class="bi bi-people"></i> Struktur Pengurus
+                </button>
+
+                <div class="small fw-bold text-uppercase text-secondary px-2 mt-3 mb-1" style="font-size: 11px; letter-spacing: 0.06em;">Pengaturan Website</div>
+                <button type="button" class="admin-nav-item" data-admin-tab="identitas" onclick="window.KMPUAdmin.switchTab('identitas')">
+                    <i class="bi bi-palette"></i> Identitas & Logo
+                </button>
+                <button type="button" class="admin-nav-item" data-admin-tab="whatsapp" onclick="window.KMPUAdmin.switchTab('whatsapp')">
+                    <i class="bi bi-chat-dots"></i> Kontak & WhatsApp
+                </button>
+            </div>
+
+            <div class="p-3 border-top bg-surface">
+                <a href="/" target="_blank" class="btn-kmp-outline w-100 py-2 mb-2" style="min-height: 38px; font-size: 13.5px;">
+                    <i class="bi bi-box-arrow-up-right"></i> Lihat Website Publik
+                </a>
+                <button type="button" class="btn btn-sm btn-outline-danger w-100 py-2" onclick="window.KMPUAdmin.logout()">
+                    <i class="bi bi-box-arrow-right"></i> Keluar Sesi Admin
+                </button>
+            </div>
+        </aside>
+
+        <!-- ================= MAIN CONTENT ADMIN ================= -->
+        <div class="admin-main">
+            <!-- Topbar -->
+            <header class="admin-topbar">
+                <div class="d-flex align-items-center gap-3">
+                    <button type="button" class="btn btn-sm border d-lg-none" onclick="document.getElementById('adminSidebar').classList.toggle('show')">
+                        <i class="bi bi-list fs-5"></i>
+                    </button>
+                    <div>
+                        <h1 class="h5 font-editorial mb-0" id="adminTopbarTitle">Ringkasan Dashboard</h1>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center gap-3">
+                    <span class="badge-sukses d-none d-sm-inline-flex"><i class="bi bi-shield-check"></i> Pengurus Aktif</span>
+                    <button type="button" class="btn btn-sm btn-light border" onclick="window.KMPUAdmin.openNewApplicationModal()">
+                        <i class="bi bi-plus-lg text-danger"></i> Catat Pendaftaran WA
+                    </button>
+                </div>
+            </header>
+
+            <!-- Toast / Alert Notifikasi -->
+            <div class="px-4 pt-3" id="adminToastContainer"></div>
+
+            <div class="p-4 flex-grow-1">
+
+                <!-- 1. TAB: DASHBOARD -->
+                <div id="admin-tab-dashboard" class="admin-tab-pane">
+                    <div class="row g-3 mb-4" id="adminDashboardStats"></div>
+
+                    <div class="row g-4">
+                        <div class="col-lg-8">
+                            <div class="kmp-card-static p-4">
+                                <div class="d-flex align-items-center justify-content-between mb-3">
+                                    <div>
+                                        <h3 class="h5 font-editorial mb-0">Tindak Lanjut Pendaftaran WhatsApp Terbaru</h3>
+                                        <div class="small text-secondary">Data calon anggota yang menghubungi melalui WhatsApp</div>
+                                    </div>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary" onclick="window.KMPUAdmin.switchTab('pendaftaran')">
+                                        Kelola Semua
+                                    </button>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table align-middle mb-0">
+                                        <thead class="table-light small">
+                                            <tr>
+                                                <th>Kode & Tanggal</th>
+                                                <th>Calon Anggota</th>
+                                                <th>Status</th>
+                                                <th class="text-end">Tindak Lanjut</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="dashboardRecentAppsBody"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="kmp-card-static p-4 mb-4">
+                                <h3 class="h5 font-editorial mb-3">Pintasan Pengelolaan</h3>
+                                <div class="d-grid gap-2">
+                                    <button type="button" class="btn-kmp-primary py-2" style="min-height: 40px; font-size: 14px;" onclick="window.KMPUAdmin.openNewApplicationModal()">
+                                        <i class="bi bi-whatsapp"></i> + Catat Pendaftaran dari WhatsApp
+                                    </button>
+                                    <button type="button" class="btn-kmp-outline py-2" style="min-height: 40px; font-size: 14px;" onclick="window.KMPUAdmin.openProductModal()">
+                                        <i class="bi bi-plus-circle"></i> + Tambah Produk Koperasi
+                                    </button>
+                                    <button type="button" class="btn-kmp-outline py-2" style="min-height: 40px; font-size: 14px;" onclick="window.KMPUAdmin.switchTab('identitas')">
+                                        <i class="bi bi-image"></i> Ubah Identitas & Logo Website
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="kmp-card-static p-4 bg-surface">
+                                <div class="fw-bold text-dark mb-1"><i class="bi bi-shield-lock text-danger me-1"></i> Kebijakan Privasi NIK</div>
+                                <p class="small text-secondary mb-0">
+                                    Sistem ini menerapkan perlindungan data pribadi warga Kelurahan Ulujami: NIK dan foto KTP tidak disimpan di publik, melainkan diverifikasi langsung oleh pengurus.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. TAB: PENDAFTARAN ANGGOTA & TINDAK LANJUT WA -->
+                <div id="admin-tab-pendaftaran" class="admin-tab-pane d-none">
+                    <div class="kmp-card-static p-4 mb-4">
+                        <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-3">
+                            <div>
+                                <h2 class="h4 font-editorial mb-1">Pendaftaran Anggota & Tindak Lanjut WhatsApp</h2>
+                                <p class="small text-secondary mb-0">Pantau calon anggota dari WhatsApp, jadwalkan verifikasi tatap muka, dan tetapkan status keanggotaan.</p>
+                            </div>
+                            <button type="button" class="btn-kmp-primary" onclick="window.KMPUAdmin.openNewApplicationModal()">
+                                <i class="bi bi-plus-lg"></i> Catat Pendaftaran dari WhatsApp
+                            </button>
+                        </div>
+
+                        <div class="row g-3 align-items-center">
+                            <div class="col-md-6">
+                                <input type="text" id="adminAppSearch" class="form-control" placeholder="Cari nama, nomor registrasi (REG-KMPU-...), atau nomor WhatsApp...">
+                            </div>
+                            <div class="col-md-4">
+                                <select id="adminAppStatusFilter" class="form-select">
+                                    <option value="">Semua Status Verifikasi</option>
+                                    <option value="menunggu_verifikasi">Menunggu Verifikasi</option>
+                                    <option value="perlu_tindak_lanjut">Perlu Tindak Lanjut</option>
+                                    <option value="sedang_diverifikasi">Sedang Diverifikasi</option>
+                                    <option value="diterima">Diterima (Anggota Resmi)</option>
+                                    <option value="ditolak">Ditolak / Ditunda</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="kmp-card-static p-4">
+                        <div class="table-responsive">
+                            <table class="table align-middle mb-0">
+                                <thead class="table-light small">
+                                    <tr>
+                                        <th>Nomor Registrasi</th>
+                                        <th>Nama & Domisili</th>
+                                        <th>WhatsApp</th>
+                                        <th>Jenis Keanggotaan</th>
+                                        <th>Jadwal Verifikasi</th>
+                                        <th>Status</th>
+                                        <th class="text-end">Aksi & WhatsApp</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminApplicationsTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. TAB: KATALOG PRODUK -->
+                <div id="admin-tab-produk" class="admin-tab-pane d-none">
+                    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
+                        <div>
+                            <h2 class="h4 font-editorial mb-1">Kelola Katalog Produk</h2>
+                            <p class="small text-secondary mb-0">Tambah, perbarui harga, foto, dan status publikasi produk koperasi maupun UMKM warga.</p>
+                        </div>
+                        <button type="button" class="btn-kmp-primary" onclick="window.KMPUAdmin.openProductModal()">
+                            <i class="bi bi-plus-lg"></i> Tambah Produk Baru
+                        </button>
+                    </div>
+
+                    <div class="kmp-card-static p-4">
+                        <div class="table-responsive">
+                            <table class="table align-middle mb-0">
+                                <thead class="table-light small">
+                                    <tr>
+                                        <th>Produk</th>
+                                        <th>Kategori & Unit</th>
+                                        <th>Harga</th>
+                                        <th>Stok</th>
+                                        <th>Status Tayang</th>
+                                        <th class="text-end">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminProductsTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. TAB: KATEGORI PRODUK -->
+                <div id="admin-tab-kategori" class="admin-tab-pane d-none">
+                    <div class="row g-4">
+                        <div class="col-lg-4">
+                            <div class="kmp-card-static p-4">
+                                <h3 class="h5 font-editorial mb-3">Tambah / Edit Kategori</h3>
+                                <form id="adminCategoryForm">
+                                    <input type="hidden" id="catId">
+                                    <div class="mb-3">
+                                        <label class="form-label fw-semibold small">Nama Kategori</label>
+                                        <input type="text" id="catNama" class="form-control" placeholder="Contoh: Bahan Pokok & Pangan" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label fw-semibold small">Deskripsi Singkat</label>
+                                        <textarea id="catDeskripsi" class="form-control" rows="3"></textarea>
+                                    </div>
+                                    <div class="d-flex gap-2">
+                                        <button type="submit" class="btn-kmp-primary flex-grow-1">Simpan Kategori</button>
+                                        <button type="button" class="btn-kmp-outline" onclick="document.getElementById('adminCategoryForm').reset(); document.getElementById('catId').value='';">Reset</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="kmp-card-static p-4">
+                                <h3 class="h5 font-editorial mb-3">Daftar Kategori Produk</h3>
+                                <div class="table-responsive">
+                                    <table class="table align-middle mb-0">
+                                        <thead class="table-light small">
+                                            <tr>
+                                                <th>Nama Kategori</th>
+                                                <th>Deskripsi</th>
+                                                <th class="text-end">Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="adminCategoriesTableBody"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. TAB: BIDANG USAHA -->
+                <div id="admin-tab-usaha" class="admin-tab-pane d-none">
+                    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
+                        <div>
+                            <h2 class="h4 font-editorial mb-1">Kelola Bidang Usaha Koperasi</h2>
+                            <p class="small text-secondary mb-0">Atur unit-unit usaha yang ditampilkan pada halaman publik.</p>
+                        </div>
+                        <button type="button" class="btn-kmp-primary" onclick="window.KMPUAdmin.openUnitModal()">
+                            <i class="bi bi-plus-lg"></i> Tambah Bidang Usaha
+                        </button>
+                    </div>
+                    <div class="row g-4" id="adminUnitsGrid"></div>
+                </div>
+
+                <!-- 6. TAB: STRUKTUR PENGURUS -->
+                <div id="admin-tab-pengurus" class="admin-tab-pane d-none">
+                    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
+                        <div>
+                            <h2 class="h4 font-editorial mb-1">Kelola Struktur Pengurus & Pengawas</h2>
+                            <p class="small text-secondary mb-0">Perbarui profil pimpinan, sekretaris, bendahara, pengawas, dan pengelola unit.</p>
+                        </div>
+                        <button type="button" class="btn-kmp-primary" onclick="window.KMPUAdmin.openOfficerModal()">
+                            <i class="bi bi-plus-lg"></i> Tambah Pengurus
+                        </button>
+                    </div>
+                    <div class="row g-4" id="adminOfficersGrid"></div>
+                </div>
+
+                <!-- 7. TAB: PENGATURAN IDENTITAS & LOGO WEBSITE -->
+                <div id="admin-tab-identitas" class="admin-tab-pane d-none">
+                    <div class="row g-4">
+                        <div class="col-lg-7">
+                            <div class="kmp-card-static p-4">
+                                <span class="eyebrow-label">PENGATURAN IDENTITAS VISUAL</span>
+                                <h2 class="h4 font-editorial mb-3">Identitas & Logo Website Koperasi</h2>
+                                <form id="adminIdentityForm">
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <label class="form-label fw-semibold small">Unggah File Gambar Logo (PNG / JPG / SVG / WebP)</label>
+                                            <input type="file" id="settingLogoFile" class="form-control" accept="image/*">
+                                            <div class="form-text">Gambar logo otomatis disimpan dan langsung tampil di seluruh halaman publik.</div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label fw-semibold small">Atau URL Gambar Logo Eksternal (Opsional)</label>
+                                            <div class="input-group">
+                                                <input type="text" id="settingLogoUrl" class="form-control" placeholder="Kosongkan untuk menggunakan logo default MP">
+                                                <button type="button" class="btn btn-outline-danger" onclick="window.KMPUAdmin.resetLogoToDefault()">
+                                                    <i class="bi bi-arrow-counterclockwise"></i> Gunakan Logo Default
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <label class="form-label fw-semibold small">Nama Resmi Koperasi</label>
+                                            <input type="text" id="settingNamaKoperasi" class="form-control" required>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label class="form-label fw-semibold small">Subjudul Wilayah / Kelurahan</label>
+                                            <input type="text" id="settingSubjudul" class="form-control" required>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label fw-semibold small">Ukuran Logo Desktop (px)</label>
+                                            <input type="number" id="settingDesktopSize" class="form-control" min="32" max="72">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label fw-semibold small">Ukuran Logo Mobile (px)</label>
+                                            <input type="number" id="settingMobileSize" class="form-control" min="28" max="56">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label fw-semibold small">Bentuk Bingkai Logo</label>
+                                            <select id="settingLogoShape" class="form-select">
+                                                <option value="lingkaran">Lingkaran</option>
+                                                <option value="persegi">Persegi Membulat</option>
+                                                <option value="otomatis">Proporsi Asli</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label fw-semibold small">Tagline / Semboyan Koperasi</label>
+                                            <input type="text" id="settingTagline" class="form-control">
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label fw-semibold small">Sejarah & Profil Singkat</label>
+                                            <textarea id="settingSejarah" class="form-control" rows="3"></textarea>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label fw-semibold small">Visi Koperasi</label>
+                                            <textarea id="settingVisi" class="form-control" rows="2"></textarea>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label fw-semibold small">Misi Koperasi (Pisahkan per baris)</label>
+                                            <textarea id="settingMisi" class="form-control" rows="4"></textarea>
+                                        </div>
+                                        <div class="col-12 pt-2">
+                                            <button type="submit" class="btn-kmp-primary">
+                                                <i class="bi bi-check2-circle"></i> Simpan Identitas & Logo
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Pratinjau Langsung -->
+                        <div class="col-lg-5">
+                            <div class="kmp-card-static p-4 mb-4">
+                                <span class="eyebrow-label">PRATINJAU LANGSUNG</span>
+                                <h3 class="h5 font-editorial mb-3">Tampilan Header Website Publik</h3>
+                                <div class="p-3 rounded-3 border bg-white d-flex align-items-center gap-3 mb-3">
+                                    <div id="previewLogoContainer"></div>
+                                    <div>
+                                        <div class="fw-bold font-editorial text-dark" id="previewNamaText">Koperasi Kelurahan Merah Putih Ulujami</div>
+                                        <div class="small fw-semibold text-secondary" style="font-size: 11.5px; letter-spacing: 0.06em;" id="previewSubText">KELURAHAN ULUJAMI</div>
+                                    </div>
+                                </div>
+                                <p class="small text-secondary mb-0">
+                                    Setiap perubahan logo, nama koperasi, maupun ukuran langsung diterapkan pada navbar dan footer halaman publik.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8. TAB: PENGATURAN KONTAK & WHATSAPP -->
+                <div id="admin-tab-whatsapp" class="admin-tab-pane d-none">
+                    <div class="row g-4">
+                        <div class="col-lg-8">
+                            <div class="kmp-card-static p-4">
+                                <span class="eyebrow-label">INTEGRASI WHATSAPP & SEKRETARIAT</span>
+                                <h2 class="h4 font-editorial mb-3">Pengaturan Kontak & Pendaftaran WhatsApp</h2>
+                                <form id="adminWhatsappForm">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label fw-semibold small">Nomor WhatsApp Resmi Pengurus</label>
+                                            <input type="text" id="settingWhatsapp" class="form-control" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label fw-semibold small">Nomor Telepon Kantor</label>
+                                            <input type="text" id="settingTelepon" class="form-control">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label fw-semibold small">Email Resmi Sekretariat</label>
+                                            <input type="email" id="settingEmail" class="form-control">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label fw-semibold small">Jam Pelayanan Sekretariat</label>
+                                            <input type="text" id="settingJam" class="form-control">
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label fw-semibold small">Alamat Lengkap Sekretariat</label>
+                                            <textarea id="settingAlamat" class="form-control" rows="2"></textarea>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label fw-semibold small">Template Pesan Otomatis Pendaftaran WhatsApp</label>
+                                            <textarea id="settingWaTemplate" class="form-control" rows="5"></textarea>
+                                            <div class="form-text">Variabel tersedia: <code>{nama_koperasi}</code>, <code>{nomor_registrasi}</code>, <code>{nama}</code>, <code>{whatsapp}</code>, <code>{domisili}</code>, <code>{jenis_keanggotaan}</code>, <code>{catatan}</code></div>
+                                        </div>
+                                        <div class="col-12 pt-2 d-flex flex-wrap gap-2 justify-content-between">
+                                            <button type="submit" class="btn-kmp-primary">
+                                                <i class="bi bi-check2-circle"></i> Simpan Pengaturan Kontak & WhatsApp
+                                            </button>
+                                            <button type="button" class="btn btn-outline-danger" onclick="window.KMPUAdmin.resetDemoData()">
+                                                <i class="bi bi-arrow-repeat"></i> Kembalikan Seluruh Data ke Awal
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= MODAL: CATAT / TINDAK LANJUT PENDAFTARAN WA ================= -->
+    <div class="modal fade" id="adminApplicationModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0 shadow">
+                <div class="modal-header border-bottom px-4 py-3">
+                    <h5 class="modal-title font-editorial" id="appModalTitle">Tindak Lanjut Pendaftaran Anggota</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form id="adminApplicationForm">
+                        <input type="hidden" id="appId">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold small">Nama Lengkap Calon Anggota</label>
+                                <input type="text" id="appNama" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold small">Nomor WhatsApp</label>
+                                <input type="text" id="appWa" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold small">Domisili RT/RW</label>
+                                <input type="text" id="appDomisili" class="form-control" placeholder="RT 004 / RW 05, Ulujami">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold small">Jenis Keanggotaan</label>
+                                <select id="appJenis" class="form-select">
+                                    <option value="Anggota Biasa">Anggota Biasa</option>
+                                    <option value="Anggota Luar Biasa (Mitra Usaha)">Anggota Luar Biasa (Mitra Usaha)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold small">Status Verifikasi</label>
+                                <select id="appStatus" class="form-select">
+                                    <option value="menunggu_verifikasi">Menunggu Verifikasi</option>
+                                    <option value="perlu_tindak_lanjut">Perlu Tindak Lanjut</option>
+                                    <option value="sedang_diverifikasi">Sedang Diverifikasi</option>
+                                    <option value="diterima">Diterima (Anggota Resmi)</option>
+                                    <option value="ditolak">Ditolak / Ditunda</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold small">Jadwal Tindak Lanjut / Tatap Muka</label>
+                                <input type="date" id="appJadwal" class="form-control">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold small">Catatan Verifikasi Pengurus</label>
+                                <textarea id="appCatatan" class="form-control" rows="2"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Tombol Kirim Pesan Tindak Lanjut WhatsApp -->
+                        <div class="mt-4 p-3 rounded-3 bg-surface border" id="appWaFollowupSection">
+                            <div class="small fw-bold text-dark mb-2"><i class="bi bi-whatsapp text-success me-1"></i> Kirim Pesan Tindak Lanjut Cepat via WhatsApp:</div>
+                            <div class="d-flex flex-wrap gap-2" id="appWaTemplateButtons"></div>
+                        </div>
+
+                        <div class="mt-4 d-flex justify-content-end gap-2">
+                            <button type="button" class="btn-kmp-outline" data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn-kmp-primary">Simpan Data Pendaftaran</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= MODAL: TAMBAH / EDIT PRODUK ================= -->
+    <div class="modal fade" id="adminProductModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0 shadow">
+                <div class="modal-header border-bottom px-4 py-3">
+                    <h5 class="modal-title font-editorial">Kelola Produk Koperasi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form id="adminProductForm">
+                        <input type="hidden" id="prodId">
+                        <div class="row g-3">
+                            <div class="col-md-8">
+                                <label class="form-label fw-semibold small">Nama Produk</label>
+                                <input type="text" id="prodNama" class="form-control" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold small">Harga (Rp)</label>
+                                <input type="number" id="prodHarga" class="form-control" min="0" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold small">Kategori Produk</label>
+                                <select id="prodKategori" class="form-select"></select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold small">Unit Usaha</label>
+                                <select id="prodUnit" class="form-select"></select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold small">Status Ketersediaan</label>
+                                <select id="prodStatusStok" class="form-select">
+                                    <option value="tersedia">Tersedia</option>
+                                    <option value="stok_terbatas">Stok Terbatas</option>
+                                    <option value="habis">Stok Habis</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold small">Jumlah Stok</label>
+                                <input type="number" id="prodStok" class="form-control" min="0" value="50">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold small">URL Foto Produk</label>
+                                <input type="text" id="prodFoto" class="form-control" placeholder="https://images.unsplash.com/...">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold small">Deskripsi Singkat</label>
+                                <input type="text" id="prodDeskSingkat" class="form-control" required>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold small">Deskripsi Lengkap</label>
+                                <textarea id="prodDeskLengkap" class="form-control" rows="2"></textarea>
+                            </div>
+                            <div class="col-12 d-flex gap-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="prodFeatured" checked>
+                                    <label class="form-check-label small" for="prodFeatured">Tampilkan sebagai Produk Unggulan</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="prodPublished" checked>
+                                    <label class="form-check-label small" for="prodPublished">Terbitkan di Katalog Publik</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 d-flex justify-content-end gap-2">
+                            <button type="button" class="btn-kmp-outline" data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn-kmp-primary">Simpan Produk</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= MODAL: TAMBAH / EDIT BIDANG USAHA ================= -->
+    <div class="modal fade" id="adminUnitModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0 shadow">
+                <div class="modal-header border-bottom px-4 py-3">
+                    <h5 class="modal-title font-editorial">Kelola Bidang Usaha</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form id="adminUnitForm">
+                        <input type="hidden" id="unitId">
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold small">Nama Bidang Usaha</label>
+                            <input type="text" id="unitNama" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold small">Nomor WhatsApp Kontak Unit</label>
+                            <input type="text" id="unitKontak" class="form-control" placeholder="081298765432">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold small">URL Foto Sampul</label>
+                            <input type="text" id="unitFoto" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold small">Deskripsi Singkat</label>
+                            <textarea id="unitDeskSingkat" class="form-control" rows="2" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold small">Deskripsi Lengkap</label>
+                            <textarea id="unitDeskLengkap" class="form-control" rows="3"></textarea>
+                        </div>
+                        <div class="d-flex justify-content-end gap-2">
+                            <button type="button" class="btn-kmp-outline" data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn-kmp-primary">Simpan Unit Usaha</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= MODAL: TAMBAH / EDIT PENGURUS ================= -->
+    <div class="modal fade" id="adminOfficerModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0 shadow">
+                <div class="modal-header border-bottom px-4 py-3">
+                    <h5 class="modal-title font-editorial">Kelola Pengurus Koperasi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form id="adminOfficerForm">
+                        <input type="hidden" id="offId">
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold small">Nama Lengkap & Gelar</label>
+                            <input type="text" id="offNama" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold small">Jabatan</label>
+                            <input type="text" id="offJabatan" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold small">Periode Bakti</label>
+                            <input type="text" id="offPeriode" class="form-control" value="2024 – 2027">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold small">URL Foto Profil</label>
+                            <input type="text" id="offFoto" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold small">Tugas & Tanggung Jawab</label>
+                            <textarea id="offDeskripsi" class="form-control" rows="2"></textarea>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="offIsKetua">
+                            <label class="form-check-label small" for="offIsKetua">Tandai sebagai Ketua Utama Koperasi</label>
+                        </div>
+                        <div class="d-flex justify-content-end gap-2">
+                            <button type="button" class="btn-kmp-outline" data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn-kmp-primary">Simpan Pengurus</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/store.js"></script>
+    <script src="/assets/js/admin.js"></script>
+</body>
+</html>

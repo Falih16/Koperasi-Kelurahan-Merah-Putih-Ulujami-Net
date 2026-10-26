@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Masuk Portal Pengurus | Koperasi Kelurahan Merah Putih Ulujami</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,600;0,700;1,400&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet">
+</head>
+<body class="login-body d-flex align-items-center justify-content-center min-vh-100 py-4 py-lg-5">
+
+    <div class="container px-3 d-flex justify-content-center">
+        <div class="login-wrapper">
+            <div class="row g-0">
+                <!-- Kolom Kiri: Panel Informasi & Branding (~45% Desktop) -->
+                <div class="col-lg-5 login-brand-panel d-none d-lg-flex">
+                    <div class="position-relative" style="z-index: 2;">
+                        <div class="d-flex align-items-center gap-3 mb-4">
+                            <div id="loginBrandLogoContainer">
+                                <div class="brand-badge-login">MP</div>
+                            </div>
+                            <div>
+                                <span class="d-block text-uppercase fw-bold text-white-50" style="font-size: 11px; letter-spacing: 0.08em;">Portal Pengurus</span>
+                                <div class="fw-bold font-editorial text-white" style="font-size: 17px; line-height: 1.2;" id="loginBrandCoopName">
+                                    Koperasi Kelurahan Merah Putih Ulujami
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <h2 class="h3 font-editorial text-white mb-2">Tata Kelola Koperasi Transparan & Amanah</h2>
+                            <p class="text-white-50" style="font-size: 14.5px; line-height: 1.6;">
+                                Pusat administrasi terpadu Koperasi Kelurahan Merah Putih Ulujami untuk melayani masyarakat dan pelaku usaha warga.
+                            </p>
+                        </div>
+
+                        <div class="d-flex flex-column gap-3 mb-4">
+                            <div class="d-flex align-items-start gap-3">
+                                <div class="feature-item-icon">
+                                    <i class="bi bi-shield-check"></i>
+                                </div>
+                                <div>
+                                    <div class="fw-semibold text-white small">Privasi & Keamanan Data Warga</div>
+                                    <div class="text-white-50" style="font-size: 12.5px;">Mencegah pengumpulan NIK publik; verifikasi berkas dilakukan langsung bersama pengurus.</div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-start gap-3">
+                                <div class="feature-item-icon">
+                                    <i class="bi bi-whatsapp"></i>
+                                </div>
+                                <div>
+                                    <div class="fw-semibold text-white small">Tindak Lanjut WhatsApp Cepat</div>
+                                    <div class="text-white-50" style="font-size: 12.5px;">Template pesan balasan otomatis dan penjadwalan verifikasi terstruktur.</div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-start gap-3">
+                                <div class="feature-item-icon">
+                                    <i class="bi bi-grid"></i>
+                                </div>
+                                <div>
+                                    <div class="fw-semibold text-white small">Pengelolaan Produk & Usaha</div>
+                                    <div class="text-white-50" style="font-size: 12.5px;">Atur katalog sembako, karya UMKM, informasi pengurus, serta logo website.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="position-relative border-top pt-3 text-white-50" style="z-index: 2; border-color: rgba(255,255,255,0.18) !important; font-size: 12px;">
+                        <i class="bi bi-geo-alt me-1"></i> Kelurahan Ulujami, Pesanggrahan, Jakarta Selatan
+                    </div>
+                </div>
+
+                <!-- Kolom Kanan: Formulir Masuk (~55% Desktop) -->
+                <div class="col-lg-7 login-form-panel d-flex flex-column justify-content-center">
+                    <!-- Branding Mobile Header -->
+                    <div class="d-lg-none text-center mb-4 pb-2 border-bottom">
+                        <div id="loginMobileLogoContainer" class="d-inline-block mb-2">
+                            <div class="brand-badge-login mx-auto" style="width: 48px; height: 48px; font-size: 18px; background: var(--gradient-merah); color: #fff;">
+                                MP
+                            </div>
+                        </div>
+                        <div class="fw-bold font-editorial text-dark fs-5" id="loginMobileCoopName">Koperasi Kelurahan Merah Putih Ulujami</div>
+                        <div class="small text-secondary fw-semibold">PORTAL PENGURUS</div>
+                    </div>
+
+                    <div class="mb-4">
+                        <span class="d-inline-block text-uppercase fw-bold mb-1" style="color: var(--primary-red); font-size: 12px; letter-spacing: 0.08em;">
+                            OTENTIKASI RESMI
+                        </span>
+                        <h1 class="h3 font-editorial mb-1">Masuk Portal Pengurus</h1>
+                        <p class="text-secondary mb-0" style="font-size: 14.5px;">
+                            Silakan masukkan kredensial resmi pengurus untuk mengakses dashboard.
+                        </p>
+                    </div>
+
+                    <!-- Alert Pesan Error / Keterangan -->
+                    <div id="loginErrorAlert" class="d-none alert p-3 mb-4 rounded-3 d-flex align-items-center gap-2" role="alert" style="background-color: var(--soft-red); border: 1px solid #EDC9CC; border-left: 4px solid var(--status-error);">
+                        <i class="bi bi-exclamation-triangle-fill text-danger fs-5 flex-shrink-0"></i>
+                        <span class="fw-semibold text-danger small" id="loginErrorText"></span>
+                    </div>
+
+                    <form id="adminLoginForm" novalidate>
+                        <!-- Input Username / Email -->
+                        <div class="mb-3">
+                            <label for="loginUsername" class="form-label fw-semibold small mb-1">Username atau Email Pengurus</label>
+                            <div class="input-group">
+                                <span class="input-group-text border-end-0">
+                                    <i class="bi bi-person text-secondary"></i>
+                                </span>
+                                <input type="text" 
+                                       id="loginUsername" 
+                                       class="form-control border-start-0" 
+                                       placeholder="Contoh: admin atau email resmi pengurus" 
+                                       required 
+                                       autofocus 
+                                       autocomplete="username"
+                                       style="min-height: 48px;">
+                            </div>
+                        </div>
+
+                        <!-- Input Kata Sandi dengan Seamless Toggle -->
+                        <div class="mb-3">
+                            <label for="loginPassword" class="form-label fw-semibold small mb-1">Kata Sandi</label>
+                            <div class="input-group">
+                                <span class="input-group-text border-end-0">
+                                    <i class="bi bi-lock text-secondary"></i>
+                                </span>
+                                <input type="password" 
+                                       id="loginPassword" 
+                                       class="form-control border-start-0 border-end-0" 
+                                       placeholder="Masukkan kata sandi pengurus" 
+                                       required 
+                                       autocomplete="current-password"
+                                       style="min-height: 48px;">
+                                <button type="button" class="btn-toggle-password" id="togglePassBtn" aria-label="Lihat atau sembunyikan kata sandi" tabindex="-1">
+                                    <i class="bi bi-eye text-secondary" id="togglePassIcon"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Baris Opsi: Ingat Saya & Lupa Sandi -->
+                        <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-2">
+                            <div class="form-check mb-0">
+                                <input class="form-check-input" type="checkbox" id="loginRemember">
+                                <label class="form-check-label small text-secondary" for="loginRemember">
+                                    Ingat saya
+                                </label>
+                            </div>
+                            <a href="javascript:void(0)" class="text-decoration-none small fw-semibold" style="color: var(--primary-red);" data-bs-toggle="modal" data-bs-target="#helpPasswordModal">
+                                Lupa kata sandi? Hubungi sekretariat
+                            </a>
+                        </div>
+
+                        <!-- Tombol Utama Submit -->
+                        <button type="submit" class="btn btn-masuk-gradient w-100" id="btnSubmitLogin">
+                            <span>Masuk ke Dashboard Pengurus</span>
+                            <i class="bi bi-arrow-right"></i>
+                        </button>
+                    </form>
+
+                    <div class="text-center mt-4 pt-3 border-top" style="border-color: var(--border-color) !important;">
+                        <a href="/" class="text-decoration-none small fw-semibold text-secondary d-inline-flex align-items-center gap-1">
+                            <i class="bi bi-arrow-left"></i> Kembali ke Beranda
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Lupa Kata Sandi / Hubungi Sekretariat -->
+    <div class="modal fade" id="helpPasswordModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 440px;">
+            <div class="modal-content rounded-4 border-0 shadow">
+                <div class="modal-header border-bottom px-4 py-3">
+                    <h5 class="modal-title font-editorial h6 mb-0">Bantuan Akses Akun Pengurus</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                </div>
+                <div class="modal-body p-4 text-start">
+                    <p class="small text-secondary mb-3">
+                        Untuk menjaga keamanan data keanggotaan dan kas koperasi, reset akun pengurus dilakukan secara terverifikasi melalui Administrator Utama atau Sekretariat Koperasi.
+                    </p>
+                    <div class="p-3 rounded-3 bg-light border mb-3">
+                        <div class="small fw-semibold text-dark mb-1"><i class="bi bi-whatsapp text-success me-1"></i> WhatsApp Sekretariat:</div>
+                        <div class="text-dark small fw-bold" id="helpModalWa">081298765432</div>
+                        <div class="small fw-semibold text-dark mt-2 mb-1"><i class="bi bi-envelope text-danger me-1"></i> Email Resmi:</div>
+                        <div class="text-dark small fw-bold" id="helpModalEmail">sekretariat@koperasimerahputih-ulujami.id</div>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-sm btn-secondary rounded-3" data-bs-dismiss="modal">Tutup</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/store.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.KMPUStore && window.KMPUStore.isAuthenticated()) {
+                window.location.href = '/admin';
+                return;
+            }
+
+            const s = window.KMPUStore ? window.KMPUStore.getSettings() : {};
+            const coopName = s.nama_koperasi || 'Koperasi Kelurahan Merah Putih Ulujami';
+            
+            const brandCoopName = document.getElementById('loginBrandCoopName');
+            if (brandCoopName) brandCoopName.textContent = coopName;
+
+            const mobileCoopName = document.getElementById('loginMobileCoopName');
+            if (mobileCoopName) mobileCoopName.textContent = coopName;
+
+            const helpWa = document.getElementById('helpModalWa');
+            if (helpWa && s.whatsapp) helpWa.textContent = s.whatsapp;
+
+            const helpEmail = document.getElementById('helpModalEmail');
+            if (helpEmail && s.email_resmi) helpEmail.textContent = s.email_resmi;
+
+            if (s.logo_url) {
+                const logoHtml = `<img src="${s.logo_url}" alt="Logo" class="kmp-brand-logo" style="width: 56px; height: 56px; background:#fff; padding:3px;">`;
+                const deskBox = document.getElementById('loginBrandLogoContainer');
+                if (deskBox) deskBox.innerHTML = logoHtml;
+                const mobBox = document.getElementById('loginMobileLogoContainer');
+                if (mobBox) mobBox.innerHTML = `<img src="${s.logo_url}" alt="Logo" class="kmp-brand-logo" style="width: 48px; height: 48px; background:#fff; padding:2px;">`;
+            }
+
+            // Toggle Tampilkan / Sembunyikan Sandi
+            const passInput = document.getElementById('loginPassword');
+            const toggleBtn = document.getElementById('togglePassBtn');
+            const toggleIcon = document.getElementById('togglePassIcon');
+            if (toggleBtn && passInput) {
+                toggleBtn.addEventListener('click', function () {
+                    const isPass = passInput.getAttribute('type') === 'password';
+                    passInput.setAttribute('type', isPass ? 'text' : 'password');
+                    toggleIcon.className = isPass ? 'bi bi-eye-slash text-danger' : 'bi bi-eye text-secondary';
+                });
+            }
+
+            // Rate Limiting Logic: 5 failed attempts -> 30s lock
+            let failedAttempts = 0;
+            let lockoutTimer = null;
+
+            const loginForm = document.getElementById('adminLoginForm');
+            const userInput = document.getElementById('loginUsername');
+            const submitBtn = document.getElementById('btnSubmitLogin');
+            const errAlert = document.getElementById('loginErrorAlert');
+            const errText = document.getElementById('loginErrorText');
+
+            if (userInput) userInput.focus();
+
+            loginForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                if (failedAttempts >= 5) {
+                    return;
+                }
+
+                const usernameVal = userInput.value.trim();
+                const passwordVal = passInput.value;
+
+                if (!usernameVal || !passwordVal) {
+                    errText.textContent = 'Mohon masukkan username/email dan kata sandi Anda.';
+                    errAlert.classList.remove('d-none');
+                    return;
+                }
+
+                // Tampilkan State Loading
+                submitBtn.disabled = true;
+                const originalHtml = submitBtn.innerHTML;
+                submitBtn.innerHTML = `
+                    <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                    <span>Memproses Masuk...</span>
+                `;
+
+                setTimeout(function () {
+                    const res = window.KMPUStore.login(usernameVal, passwordVal);
+
+                    if (res.ok) {
+                        errAlert.classList.add('d-none');
+                        window.location.href = '/admin';
+                    } else {
+                        failedAttempts++;
+                        passInput.value = ''; // Kosongkan kata sandi
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = originalHtml;
+
+                        if (failedAttempts >= 5) {
+                            let countdown = 30;
+                            submitBtn.disabled = true;
+                            errText.textContent = `Terlalu banyak percobaan gagal. Mohon tunggu ${countdown} detik sebelum mencoba lagi.`;
+                            errAlert.classList.remove('d-none');
+
+                            lockoutTimer = setInterval(function () {
+                                countdown--;
+                                if (countdown > 0) {
+                                    errText.textContent = `Terlalu banyak percobaan gagal. Mohon tunggu ${countdown} detik sebelum mencoba lagi.`;
+                                    submitBtn.innerHTML = `<span>Tunggu (${countdown}s)...</span>`;
+                                } else {
+                                    clearInterval(lockoutTimer);
+                                    failedAttempts = 0;
+                                    submitBtn.disabled = false;
+                                    submitBtn.innerHTML = originalHtml;
+                                    errAlert.classList.add('d-none');
+                                }
+                            }, 1000);
+                        } else {
+                            // Pesan error umum dalam Bahasa Indonesia tanpa membocorkan spesifikasi
+                            errText.textContent = 'Username/email atau kata sandi yang Anda masukkan tidak sesuai.';
+                            errAlert.classList.remove('d-none');
+                            passInput.focus();
+                        }
+                    }
+                }, 400);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,776 @@
+/* ==========================================================================
+   DESIGN SYSTEM: MODERN INSTITUTIONAL MINIMALISM
+   Koperasi Kelurahan Merah Putih Ulujami (Netlify Ready Edition)
+   ========================================================================== */
+
+:root {
+    /* Sistem Warna Utama */
+    --deep-burgundy: #8F1722;
+    --primary-red: #C92532;
+    --soft-red: #F8E8E9;
+
+    /* Sistem Warna Netral */
+    --pure-white: #FFFFFF;
+    --warm-bg: #FAF9F6;
+    --light-surface: #F3F1ED;
+    --text-primary: #252525;
+    --text-secondary: #686868;
+    --border-color: #E8E5E0;
+
+    /* Sistem Warna Status */
+    --status-success: #287A52;
+    --status-warning: #A96812;
+    --status-error: #B4232D;
+
+    /* Sistem Gradien Merah-Putih */
+    --gradient-merah-putih: linear-gradient(135deg, #8F1722 0%, #C92532 45%, #F8E8E9 80%, #FFFFFF 100%);
+    --gradient-hero: linear-gradient(180deg, #FFFFFF 0%, #FDF3F4 55%, #F8E8E9 100%);
+    --gradient-merah: linear-gradient(135deg, #8F1722 0%, #C92532 100%);
+    --gradient-putih-lembut: linear-gradient(180deg, #FFFFFF 0%, #FAF9F6 100%);
+    --gradient-bendera: linear-gradient(180deg, #C92532 0%, #C92532 50%, #FFFFFF 50%, #FFFFFF 100%);
+
+    /* Variabel Identitas & Logo Dinamis */
+    --desktop-logo-size: 46px;
+    --mobile-logo-size: 38px;
+    --logo-spacing: 12px;
+    --logo-radius: 50%;
+}
+
+/* Dasar Halaman & Tipografi */
+body {
+    font-family: 'Source Sans 3', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--text-primary);
+    background-color: var(--warm-bg);
+    padding-top: 76px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+
+body.admin-body,
+body.login-body {
+    padding-top: 0;
+    font-size: 15px;
+    line-height: 1.55;
+}
+
+h1, h2, h3, h4, .font-editorial {
+    font-family: 'Lora', Georgia, 'Times New Roman', serif;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+}
+
+h1, .h1-editorial {
+    font-size: clamp(2.125rem, 4vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.18;
+}
+
+h2, .h2-editorial {
+    font-size: clamp(1.7rem, 2.8vw, 2.35rem);
+    font-weight: 600;
+    line-height: 1.24;
+}
+
+h3, .h3-editorial {
+    font-size: clamp(1.22rem, 1.8vw, 1.48rem);
+    font-weight: 600;
+    line-height: 1.32;
+}
+
+p {
+    color: var(--text-secondary);
+    line-height: 1.65;
+}
+
+.prose-limit {
+    max-width: 650px;
+}
+
+.stat-number {
+    font-family: 'Inter', 'Source Sans 3', system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+/* Sistem Container & Spacing */
+.container-xl {
+    max-width: 1200px;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+.section-padding {
+    padding-top: 72px;
+    padding-bottom: 72px;
+}
+
+.section-padding-sm {
+    padding-top: 48px;
+    padding-bottom: 48px;
+}
+
+@media (max-width: 991.98px) {
+    .section-padding {
+        padding-top: 48px;
+        padding-bottom: 48px;
+    }
+    .section-padding-sm {
+        padding-top: 36px;
+        padding-bottom: 36px;
+    }
+    .container-xl {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+}
+
+.bg-warm { background-color: var(--warm-bg) !important; }
+.bg-surface { background-color: var(--light-surface) !important; }
+.bg-pure-white { background-color: var(--pure-white) !important; }
+.bg-burgundy { background-color: var(--deep-burgundy) !important; color: var(--pure-white); }
+
+/* Eyebrow & Section Header */
+.eyebrow-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Source Sans 3', 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--primary-red);
+    margin-bottom: 12px;
+}
+
+.eyebrow-label::before {
+    content: "";
+    display: inline-block;
+    width: 18px;
+    height: 2px;
+    background-color: var(--primary-red);
+    border-radius: 2px;
+}
+
+/* Navbar Minimalis & Elegan dengan Aksen Garis Gradien Merah-Putih */
+.kmp-navbar {
+    background-color: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    transition: box-shadow 0.2s ease, background-color 0.2s ease;
+    z-index: 1040;
+    min-height: 76px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.kmp-navbar::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--deep-burgundy) 0%, var(--primary-red) 35%, var(--soft-red) 75%, #FFFFFF 100%);
+    pointer-events: none;
+}
+
+.kmp-navbar.scrolled {
+    box-shadow: 0 4px 20px rgba(37, 37, 37, 0.06);
+}
+
+.kmp-nav-link {
+    color: var(--text-primary);
+    font-size: 16px;
+    font-weight: 500;
+    padding: 8px 14px;
+    border-radius: 8px;
+    transition: color 0.18s ease, background-color 0.18s ease;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+}
+
+.kmp-nav-link:hover {
+    color: var(--primary-red);
+    background-color: var(--soft-red);
+}
+
+.kmp-nav-link.active {
+    color: var(--primary-red);
+    font-weight: 600;
+    background-color: var(--soft-red);
+}
+
+/* Logo & Identitas Dinamis */
+.kmp-brand-logo {
+    width: var(--desktop-logo-size);
+    height: var(--desktop-logo-size);
+    border-radius: var(--logo-radius);
+    object-fit: contain;
+    flex-shrink: 0;
+    background-color: #FFFFFF;
+    padding: 2px;
+    border: 1px solid var(--border-color);
+    transition: all 0.2s ease;
+}
+
+.kmp-brand-badge {
+    width: var(--desktop-logo-size);
+    height: var(--desktop-logo-size);
+    border-radius: var(--logo-radius);
+    background: var(--gradient-merah);
+    color: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: calc(var(--desktop-logo-size) * 0.36);
+    border: 2px solid #FFFFFF;
+    box-shadow: 0 2px 6px rgba(143, 23, 34, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+}
+
+.kmp-brand-wrapper {
+    gap: var(--logo-spacing);
+}
+
+@media (max-width: 991.98px) {
+    .kmp-brand-logo, .kmp-brand-badge {
+        width: var(--mobile-logo-size);
+        height: var(--mobile-logo-size);
+    }
+    .kmp-brand-badge {
+        font-size: calc(var(--mobile-logo-size) * 0.36);
+    }
+}
+
+/* Sistem Tombol (Minimal 46-48px Touch Area, Radius 8-10px) */
+.btn-kmp-primary {
+    background: var(--gradient-merah);
+    color: #FFFFFF !important;
+    font-weight: 600;
+    font-size: 16px;
+    min-height: 48px;
+    padding: 11px 24px;
+    border-radius: 9px;
+    border: 1px solid transparent;
+    box-shadow: 0 2px 8px rgba(201, 37, 50, 0.2);
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-kmp-primary:hover {
+    background: linear-gradient(135deg, #7A121C 0%, #B31F2A 100%);
+    box-shadow: 0 4px 14px rgba(143, 23, 34, 0.28);
+    transform: translateY(-1px);
+    color: #FFFFFF !important;
+}
+
+.btn-kmp-outline {
+    background-color: #FFFFFF;
+    color: var(--text-primary) !important;
+    border: 1.5px solid var(--border-color);
+    font-weight: 600;
+    font-size: 16px;
+    min-height: 48px;
+    padding: 11px 24px;
+    border-radius: 9px;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-kmp-outline:hover {
+    border-color: var(--primary-red);
+    color: var(--primary-red) !important;
+    background-color: var(--soft-red);
+    transform: translateY(-1px);
+}
+
+.btn-kmp-whatsapp {
+    background-color: var(--status-success);
+    color: #FFFFFF !important;
+    font-weight: 600;
+    font-size: 15px;
+    min-height: 46px;
+    padding: 10px 20px;
+    border-radius: 9px;
+    border: 1px solid var(--status-success);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-kmp-whatsapp:hover {
+    background-color: #1E6140;
+    border-color: #1E6140;
+    color: #FFFFFF !important;
+    transform: translateY(-1px);
+}
+
+/* Sistem Kartu dengan Garis Atas Gradien Merah-Putih saat Hover */
+.kmp-card {
+    background: var(--pure-white);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    box-shadow: 0 2px 10px rgba(37, 37, 37, 0.025);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.kmp-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-red) 0%, var(--soft-red) 100%);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    z-index: 2;
+}
+
+.kmp-card:hover::before {
+    opacity: 1;
+}
+
+.kmp-card:hover {
+    border-color: #D8D2C9;
+    box-shadow: 0 8px 24px rgba(37, 37, 37, 0.055);
+    transform: translateY(-2px);
+}
+
+.kmp-card-static {
+    background: var(--pure-white);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    box-shadow: 0 2px 10px rgba(37, 37, 37, 0.025);
+}
+
+/* Header Halaman Dalam & Hero Gradien */
+.page-header-section {
+    background: var(--gradient-hero);
+    border-bottom: 1px solid var(--border-color);
+    padding-top: 52px;
+    padding-bottom: 52px;
+    position: relative;
+}
+
+.hero-section-gradient {
+    background: var(--gradient-hero);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section-gradient::after {
+    content: "";
+    position: absolute;
+    right: -100px;
+    top: -100px;
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201, 37, 50, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.hero-gradient {
+    background: var(--gradient-hero);
+}
+
+.cta-burgundy-gradient {
+    background: var(--gradient-merah) !important;
+    color: var(--pure-white);
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-burgundy-gradient::before {
+    content: "";
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+    background-size: 20px 20px;
+    pointer-events: none;
+}
+
+/* Sistem Input Formulir */
+.form-control, .form-select {
+    border: 1px solid var(--border-color);
+    border-radius: 9px;
+    color: var(--text-primary);
+    padding: 11px 16px;
+    font-size: 15px;
+    background-color: var(--pure-white);
+    transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary-red);
+    box-shadow: 0 0 0 3px rgba(201, 37, 50, 0.12);
+}
+
+/* Input group styling for icons and buttons */
+.input-group-text {
+    background-color: #FFFFFF;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-size: 16px;
+}
+
+.input-group:focus-within .input-group-text,
+.input-group:focus-within .form-control {
+    border-color: var(--primary-red);
+}
+
+.input-group:focus-within {
+    box-shadow: 0 0 0 3px rgba(201, 37, 50, 0.12);
+    border-radius: 9px;
+}
+
+.input-group .form-control:focus {
+    box-shadow: none;
+}
+
+.btn-toggle-password {
+    border: 1px solid var(--border-color);
+    border-left: none;
+    background-color: #FFFFFF;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0 14px;
+    border-radius: 0 9px 9px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-toggle-password:hover {
+    color: var(--text-primary);
+    background-color: var(--light-surface);
+}
+
+/* Accessibility Focus Ring */
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+    outline: 2px solid var(--primary-red) !important;
+    outline-offset: 2px !important;
+}
+
+/* Badge Status */
+.badge-sukses {
+    background-color: #EAF4EE;
+    color: var(--status-success);
+    border: 1px solid #C6E2D2;
+    font-weight: 600;
+    padding: 4px 11px;
+    border-radius: 6px;
+    font-size: 12.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.badge-merah {
+    background-color: var(--soft-red);
+    color: var(--deep-burgundy);
+    border: 1px solid #EDC9CC;
+    font-weight: 600;
+    padding: 4px 11px;
+    border-radius: 6px;
+    font-size: 12.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.badge-kuning {
+    background-color: #FEF7EA;
+    color: var(--status-warning);
+    border: 1px solid #F3D9A4;
+    font-weight: 600;
+    padding: 4px 11px;
+    border-radius: 6px;
+    font-size: 12.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.badge-biru {
+    background-color: #EDF5FF;
+    color: #1D58A8;
+    border: 1px solid #C5DCFA;
+    font-weight: 600;
+    padding: 4px 11px;
+    border-radius: 6px;
+    font-size: 12.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Footer Gradien Burgundy ke Merah */
+.kmp-footer {
+    background: linear-gradient(180deg, var(--deep-burgundy) 0%, #6d1019 100%);
+    color: rgba(255, 255, 255, 0.85);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    position: relative;
+}
+
+.kmp-footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #FFFFFF 0%, var(--primary-red) 50%, var(--deep-burgundy) 100%);
+}
+
+.kmp-footer a {
+    color: rgba(255, 255, 255, 0.78);
+    text-decoration: none;
+    transition: color 0.18s ease;
+}
+
+.kmp-footer a:hover {
+    color: #FFFFFF;
+}
+
+/* ==========================================================================
+   HALAMAN LOGIN REDESIGN (TWO-COLUMN DESKTOP LAYOUT)
+   ========================================================================== */
+.login-wrapper {
+    width: 100%;
+    max-width: 980px;
+    background: #FFFFFF;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    box-shadow: 0 16px 48px rgba(37, 37, 37, 0.08);
+    overflow: hidden;
+}
+
+.login-brand-panel {
+    background: var(--gradient-merah);
+    color: #FFFFFF;
+    padding: 48px 40px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.login-brand-panel::before {
+    content: "";
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1.5px, transparent 1.5px);
+    background-size: 24px 24px;
+    pointer-events: none;
+}
+
+.login-brand-panel::after {
+    content: "";
+    position: absolute;
+    bottom: -60px;
+    right: -60px;
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.brand-badge-login {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    color: var(--deep-burgundy);
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.feature-item-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.16);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #FFFFFF;
+    font-size: 15px;
+}
+
+.login-form-panel {
+    padding: 48px 44px;
+    background: #FFFFFF;
+}
+
+@media (max-width: 991.98px) {
+    .login-form-panel {
+        padding: 36px 24px;
+    }
+}
+
+.btn-masuk-gradient {
+    background: var(--gradient-merah);
+    color: #FFFFFF !important;
+    font-weight: 600;
+    font-size: 16px;
+    min-height: 48px;
+    border-radius: 9px;
+    border: 1px solid transparent;
+    box-shadow: 0 3px 10px rgba(201, 37, 50, 0.22);
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.btn-masuk-gradient:hover:not(:disabled) {
+    background: linear-gradient(135deg, #7A121C 0%, #B31F2A 100%);
+    box-shadow: 0 5px 16px rgba(143, 23, 34, 0.28);
+    transform: translateY(-1px);
+}
+
+.btn-masuk-gradient:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* ==========================================================================
+   ADMIN PORTAL LAYOUT
+   ========================================================================== */
+.admin-wrapper {
+    display: flex;
+    min-height: 100vh;
+    background-color: var(--warm-bg);
+}
+
+.admin-sidebar {
+    width: 268px;
+    background-color: var(--pure-white);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1030;
+    transition: transform 0.25s ease;
+}
+
+.admin-main {
+    flex: 1;
+    margin-left: 268px;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.admin-topbar {
+    height: 70px;
+    background-color: var(--pure-white);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 28px;
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+    position: relative;
+}
+
+.admin-topbar::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--deep-burgundy) 0%, var(--primary-red) 35%, var(--soft-red) 75%, transparent 100%);
+    pointer-events: none;
+}
+
+.admin-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 10px 14px;
+    border-radius: 9px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 14.5px;
+    text-decoration: none;
+    transition: all 0.18s ease;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    width: 100%;
+    text-align: left;
+}
+
+.admin-nav-item:hover {
+    color: var(--primary-red);
+    background-color: var(--soft-red);
+}
+
+.admin-nav-item.active {
+    background: linear-gradient(90deg, var(--soft-red) 0%, rgba(248, 232, 233, 0.45) 100%);
+    color: var(--deep-burgundy);
+    font-weight: 600;
+    border-left: 3px solid var(--primary-red);
+}
+
+@media (max-width: 991.98px) {
+    .admin-sidebar {
+        transform: translateX(-100%);
+    }
+    .admin-sidebar.show {
+        transform: translateX(0);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.18);
+    }
+    .admin-main {
+        margin-left: 0;
+    }
+}
